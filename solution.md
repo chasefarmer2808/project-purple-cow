@@ -5,11 +5,14 @@ the number of hits on the app.
 ## My Solution
 This app uses ReactJS and was created with Create React App(CRA).  It currently does not use any additional NPM or third-party libraries other than the ones CRA installs.  When the user enters the app, the hit count is incremented by one through a request to the countapi service.  It then displays the latest hit count data.  There is also a button that re-fetches and updates the view with the latest hit count data.  All HTTP requests are done with JavaScript's `fetch` method.
 
-## Build the App
-To build a production-ready version of the app, run `yarn build`.  In its current version, CRA uses Webpack to bundle the app source and static assets.
 
-## Run the App
-To run the app for either production or development, run `yarn start`.  This will again use Webpack to create a bundle, and then start a simple web server to serve the app.
+# Development
+To run the app for development, run `yarn start`.  This will use Webpack to create a bundle, and then start a simple web server to serve the app.  Any changes saved to the source files will be hot-reloaded.
+## Build the App
+To build a production-ready version of the app, run `yarn build`.  In its current version, CRA uses Webpack to bundle the app source and static assets.  This is output to a folder called `build`.
+
+## Run the App for Production
+I am using the [server]() program to serve the static, bundled app files.  This is recommended by CRA's documentation, but any webserver can be used.  Such as nginx or apache.  To run using serve, first install it globally using `npm install -g serve`.  Then run with `serve -s build -l <port>`.
 
 ## Configure the Port
 The port number that CRA will use is stored in the `.env` file with the name `PORT`.  This

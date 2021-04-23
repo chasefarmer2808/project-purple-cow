@@ -1,5 +1,9 @@
 from node
+RUN npm install -g serve
 WORKDIR /app
-COPY . .
+# Separating here so docker caches node_modules.
+COPY package.json ./
 RUN yarn install
-CMD ["yarn", "start"]
+COPY . ./
+RUN yarn build
+CMD ["npx", "serve", "-s", "build", "-l", "${PORT}"]
