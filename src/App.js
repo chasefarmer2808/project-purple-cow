@@ -30,8 +30,9 @@ function App() {
 
   return (
     <main>
+      <h1 className="app-title">Project Purle Cow</h1>
       <button onClick={fetchHits} disabled={isLoading}>Update Hits</button>
-      {!isLoading ? <p>{hits}</p> : <p>Loading...</p>}
+      {!isLoading ? <h2 className="hit-count">{hits}</h2> : <h2>Loading...</h2>}
     </main>
   );
 }
