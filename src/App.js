@@ -1,24 +1,38 @@
-import logo from './logo.svg';
 import './App.css';
+import { useState, useEffect } from 'react';
+
+// Note: Key not secret.  Otherwise, place in untracked env config.
+const GET_URL = 'https://api.countapi.xyz/get/1ccb732e-b55a-4404-ad3f-0f99c02fe44e';
+const HIT_URL = 'https://api.countapi.xyz/hit/1ccb732e-b55a-4404-ad3f-0f99c02fe44e';
 
 function App() {
+  const [hits, setHits] = useState();
+  const [isLoading, setIsLoadingState] = useState(false);
+
+  const incrementHits = async () => {
+    setIsLoadingState(true);
+    const hitData = await (await fetch(HIT_URL)).json()
+    setHits(hitData.value);
+    setIsLoadingState(false);
+  }
+
+  const fetchHits = async () => {
+    setIsLoadingState(true);
+    const hitData = await (await fetch(GET_URL)).json()
+    setHits(hitData.value);
+    setIsLoadingState(false);
+  }
+
+  useEffect(() => {
+    // Fetch the latest hit count on load.
+    incrementHits();
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <main>
+      <button onClick={fetchHits} disabled={isLoading}>Update Hits</button>
+      {!isLoading ? <p>{hits}</p> : <p>Loading...</p>}
+    </main>
   );
 }
 
