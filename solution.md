@@ -16,6 +16,14 @@ The port number that CRA will use is stored in the `.env` file with the name `PO
 can be changed to any valid, open port number on the server.  CRA will use the latest value
 automatically.
 
+## Build and Run with Docker
+This app can be run with the provided `Dockerfile`.  Run the following command to build the image:
+
+`docker build -t project_purple_cow .`
+
+And run the following command to run the image in a container:
+
+`docker run -p 3000:3000 project_purple_cow`
 ### Future Updates
 - Show current hit count in real time.  Polling, websocket, or real-time DB.
 - Store the hit count state in a global context.  That way, parent components do no have to pass state down to deep child components.
